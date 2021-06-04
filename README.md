@@ -24,17 +24,16 @@ ambiente.
 
 Desenvolvimento durante atividade do curso de Técnico de desenvolvimento de sistemas.
 
-<h2><img width="30" src="https://user-images.githubusercontent.com/62961331/120732681-1b8c3000-c4bc-11eb-93f8-f9b66e37a72d.png" alt="Calculadora IMC">Link para download do apk</h2>
-
-[![buttonApk](https://user-images.githubusercontent.com/62961331/120733150-f5b35b00-c4bc-11eb-95e1-3367aa078016.png)](https://drive.google.com/file/d/1v0RjNS1Ay6-_Vq_UEainCYHX5GuXbp-C/view)
-
-
 <h3>🚀 Tecnologias utilizadas</h3>
 
 <ul>
   <li>Kotlin</li>
   <li>XML</li>
 </ul>
+
+<h2><img width="30" src="https://user-images.githubusercontent.com/62961331/120732681-1b8c3000-c4bc-11eb-93f8-f9b66e37a72d.png" alt="Calculadora IMC">Link para download do apk</h2>
+
+[![buttonApk](https://user-images.githubusercontent.com/62961331/120733150-f5b35b00-c4bc-11eb-95e1-3367aa078016.png)](https://drive.google.com/file/d/1v0RjNS1Ay6-_Vq_UEainCYHX5GuXbp-C/view)
 
 <h2><img width="30" src="https://user-images.githubusercontent.com/62961331/119139433-64061100-ba19-11eb-81f4-fccf6b1b5164.png" alt="Calculadora IMC">Mais imagens do projeto</h2>
 
