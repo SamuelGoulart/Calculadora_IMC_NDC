@@ -42,17 +42,40 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/bottom_wave"
         android:layout_below="@+id/top_wave"
-        android:layout_margin="32dp">
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="-15dp"
+        android:layout_marginRight="32dp">
+
+
+        <TextView
+            android:id="@+id/text_view_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:textStyle="bold"
+            android:textSize="28sp" />
+
+        <TextView
+            android:id="@+id/text_view_faca_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Faça login para continuar"
+
+            android:layout_below="@+id/text_view_login"
+            android:textSize="14sp"
+            android:layout_marginBottom="20dp"/>
 
         <EditText
             android:id="@+id/editText_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/round_edit_text"
+            android:drawableStart="@drawable/ic_baseline_email_24"
             android:padding="10dp"
             android:hint="E-mail"
             android:drawablePadding="8dp"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:layout_below="@+id/text_view_faca_login"/>
 
         <EditText
             android:id="@+id/editText_senha"
@@ -74,16 +97,18 @@
             android:layout_height="wrap_content"
             android:text="ENTRAR"
             android:textColor="#fff"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/round_button"
             android:layout_below="@+id/editText_senha" />
 
-        <RadioButton
+        <CheckBox
             android:id="@+id/radio_Button_Lembrar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Lembrar"
             android:layout_below="@+id/button_Entrar"
-            android:layout_alignParentEnd="true"/>
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:checked="false"
+            android:text="Lembrar" />
 
         <TextView
             android:id="@+id/text_view_esqueceu_senha"
@@ -99,13 +124,14 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/text_view_esqueceu_senha"
             android:layout_toStartOf="@+id/text_view_crie_sua_conta"
-            android:text="Novo por aqui?"/>
+            android:layout_marginEnd="5dp"
+            android:text="Não tem uma conta?"/>
 
         <TextView
             android:id="@+id/text_view_crie_sua_conta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Crie sua conta"
+            android:text="Crie sua conta agora"
             android:layout_below="@+id/text_view_esqueceu_senha"
             android:layout_alignParentEnd="true"
             android:textColor="#0077cc" />

@@ -10,6 +10,7 @@
         android:roundIcon="@drawable/peso"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".DashBoardActivity"></activity>
         <activity android:name=".activity_login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,9 +22,7 @@
         <activity android:name=".NcdActivity" />
         <activity android:name=".ResultadoImcActivity" />
         <activity android:name=".ImcActivity" />
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".MainActivity"></activity>
 
         <meta-data
             android:name="preloaded_fonts"
