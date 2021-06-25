@@ -123,12 +123,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/text_view_esqueceu_senha"
-            android:layout_toStartOf="@+id/text_view_crie_sua_conta"
+            android:layout_toStartOf="@+id/tv_criar_conta"
             android:layout_marginEnd="5dp"
             android:text="Não tem uma conta?"/>
 
         <TextView
-            android:id="@+id/text_view_crie_sua_conta"
+            android:id="@+id/tv_criar_conta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Crie sua conta agora"
