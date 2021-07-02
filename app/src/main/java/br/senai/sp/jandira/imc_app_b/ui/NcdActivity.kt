@@ -1,13 +1,11 @@
-package br.senai.sp.jandira.imc_app_b
+package br.senai.sp.jandira.imc_app_b.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.RadioButton
-import android.widget.RadioGroup
 import android.widget.*
-import java.security.acl.Group
+import br.senai.sp.jandira.imc_app_b.R
 
 class NcdActivity : AppCompatActivity() {
 

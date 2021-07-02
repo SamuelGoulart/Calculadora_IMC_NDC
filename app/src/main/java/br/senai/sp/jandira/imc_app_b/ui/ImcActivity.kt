@@ -1,10 +1,11 @@
-package br.senai.sp.jandira.imc_app_b
+package br.senai.sp.jandira.imc_app_b.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import br.senai.sp.jandira.imc_app_b.R
 
 class ImcActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

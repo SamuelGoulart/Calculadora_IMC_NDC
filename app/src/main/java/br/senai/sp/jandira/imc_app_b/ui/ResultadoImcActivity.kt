@@ -1,8 +1,12 @@
-package br.senai.sp.jandira.imc_app_b
+package br.senai.sp.jandira.imc_app_b.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import br.senai.sp.jandira.imc_app_b.R
+import br.senai.sp.jandira.imc_app_b.calcularImc
+import br.senai.sp.jandira.imc_app_b.getDica
+import br.senai.sp.jandira.imc_app_b.obterStatus
 
 class ResultadoImcActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:gravity="bottom|center_horizontal"
         android:orientation="vertical"
-        tools:context=".ImcActivity">
+        tools:context=".ui.ImcActivity">
 
         <ImageView
             android:layout_width="wrap_content"

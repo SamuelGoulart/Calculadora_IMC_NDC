@@ -1,9 +1,10 @@
-package br.senai.sp.jandira.imc_app_b
+package br.senai.sp.jandira.imc_app_b.ui
 
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import br.senai.sp.jandira.imc_app_b.R
 import kotlinx.android.synthetic.main.activity_dash_board.*
 
 class DashBoardActivity : AppCompatActivity() {

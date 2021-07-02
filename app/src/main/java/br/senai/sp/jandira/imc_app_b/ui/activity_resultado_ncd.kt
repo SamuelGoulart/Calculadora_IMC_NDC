@@ -1,10 +1,12 @@
-package br.senai.sp.jandira.imc_app_b
+package br.senai.sp.jandira.imc_app_b.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
-import kotlinx.android.synthetic.main.activity_main.*
-import org.w3c.dom.Text
+import br.senai.sp.jandira.imc_app_b.R
+import br.senai.sp.jandira.imc_app_b.getDicaNcd
+import br.senai.sp.jandira.imc_app_b.ncd
+import br.senai.sp.jandira.imc_app_b.taxaMetabolismoBasal
 
 class activity_resultado_ncd : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,9 +23,14 @@ class activity_resultado_ncd : AppCompatActivity() {
         val grauAtividadeFisica = intent.getIntExtra("grauAtividadeFisica", 0)
         val sexo = intent.getCharExtra("sexo", '?')
 
-        val  tmb = taxaMetabolismoBasal(pesoNcd, faixaEtariaIdade, sexo)
+        val  tmb = taxaMetabolismoBasal(
+            pesoNcd,
+            faixaEtariaIdade,
+            sexo
+        )
 
-        val resultadoNcd = ncd(tmb, grauAtividadeFisica, sexo)
+        val resultadoNcd =
+            ncd(tmb, grauAtividadeFisica, sexo)
 
         val dicaNcd = getDicaNcd()
 

@@ -1,4 +1,4 @@
-package br.senai.sp.jandira.imc_app_b
+package br.senai.sp.jandira.imc_app_b.ui
 
 import android.content.Context
 import android.content.Intent
@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import br.senai.sp.jandira.imc_app_b.R
 import kotlinx.android.synthetic.main.activity_login.*
 
 class activity_login : AppCompatActivity() {

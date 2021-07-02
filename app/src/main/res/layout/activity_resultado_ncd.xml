@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity_resultado_ncd"
+    tools:context=".ui.activity_resultado_ncd"
     android:fillViewport="true">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ResultadoImcActivity"
+        tools:context=".ui.ResultadoImcActivity"
         android:orientation="vertical"
         android:background="@color/colorPrimary">
 

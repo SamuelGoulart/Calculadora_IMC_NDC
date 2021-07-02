@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbarSize="15sp"
-    tools:context=".DashBoardActivity">
+    tools:context=".ui.DashBoardActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header"
