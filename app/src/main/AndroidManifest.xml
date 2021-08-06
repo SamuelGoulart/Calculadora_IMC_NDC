@@ -1,26 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="br.senai.sp.jandira.imc_app_b">
+    package="br.senai.sp.jandira.imcapp20_a">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/peso"
+        android:icon="@drawable/bmi"
         android:label="@string/app_name"
-        android:largeHeap="true"
-        android:roundIcon="@drawable/peso"
+        android:roundIcon="@drawable/bmi"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.novoUsuarioActivity"></activity>
+        <activity android:name=".ui.NovoUsuarioActivity"></activity>
         <activity android:name=".ui.DashBoardActivity" />
-        <activity android:name=".ui.activity_login">
+        <activity android:name=".ui.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity_resultado_ncd" />
-        <activity android:name=".ui.NcdActivity" />
+        <activity android:name=".ui.ResultadoNcdActivity" />
+        <activity android:name=".NcdActivity" />
         <activity android:name=".ui.ResultadoImcActivity" />
         <activity android:name=".ui.ImcActivity" />
         <activity android:name=".ui.MainActivity" />
@@ -29,5 +30,7 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
+
+
 
 </manifest>

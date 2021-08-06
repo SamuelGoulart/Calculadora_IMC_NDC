@@ -1,47 +1,23 @@
 <resources>
-    <string name="app_name">IMC - APP</string>
+    <string name="app_name">IMC APP 2.0</string>
 
-    <string name="text_view_resultado">Resultado</string>
-    <string name="text_view_titulo_ncd">NCD</string>
-    <string name="text_view_peso">Peso</string>
-    <string name="text_view_selecione_sua_faixa_de_idade">Selecione sua faixa de idade!</string>
-    <string name="text_view_selecione_nivel_atividade_diarias">Selecione o nível de atividade diárias!</string>
-    <string name="text_view_necessidade_calorica_diaria_ncd">Necessidade Calórica diária (NCD)</string>
-    <string name="text_view_altura">Altura:</string>
-    <string name="text_view_imc">IMC</string>
-    <string name="text_view_calcular_imc">Calcular IMC</string>
-    <string name="text_view_calcular_ncd">Calcular NCD</string>
-    <string name="text_view_calculadora_saudavel">Calculadora Saudável</string>
-    <string name="text_view_o_que_voce_deseja_fazer_hoje">O que você deseja fazer hoje?</string>
-    <string name="text_view_20_5">20,5</string>
-    <string name="text_view_peso_ideal">Peso Ideal</string>
-    <string name="text_view_titulo">Título</string>
-    <string name="text_view_movimente_se">Movimente-se ...</string>
-    <string name="text_view_aqui">Aqui</string>
+    <!--    Strings Main Activity-->
+    <string name="main_title">Calculadora Saudável</string>
+    <string name="text_fazer_hoje">O que você deseja fazer hoje?</string>
 
-    <string name="radioButtonMasculino">Masculino</string>
-    <string name="radioButtonFeminino">Feminino</string>
-
-    <string name="edit_text_qual_o_seu_peso">Qual o seu peso?</string>
-    <string name="edit_text_qual_sua_altura">Qual é a sua altura?</string>
-    <string name="edit_text_qual_o_seu_sexo">Qual o seu sexo:</string>
-
-    <string name="button_calcular_imc">Calcular IMC</string>
-    <string name="button_calcular_ncd">Calcular NCD</string>
-
-
-    <string-array name="spinnerFaixaIdade">
+    <string-array name="faixa_etaria">
         <item>Selecione uma opção</item>
-        <item>Entre 18 a 30 anos </item>
-        <item>Entre 31 a 60 anos</item>
+        <item>Entre 18 e 30 anos</item>
+        <item>Entre 31 e 60 anos</item>
         <item>Acima de 60 anos</item>
     </string-array>
 
-    <string-array name="spinnergrauAtividade">
-        <item>Selecione uma opção</item>
+    <string-array name="atividades">
+        <item>Nenhuma</item>
         <item>Atividade leve</item>
         <item>Atividade moderada</item>
         <item>Atividade intensa</item>
     </string-array>
+
 
 </resources>
