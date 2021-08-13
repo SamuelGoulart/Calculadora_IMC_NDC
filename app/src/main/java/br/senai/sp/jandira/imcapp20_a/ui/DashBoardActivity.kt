@@ -34,10 +34,10 @@ class DashBoardActivity : AppCompatActivity() {
         tv_profile_name.text = dados.getString("nome", "")
         tv_profile_occupation.text = dados.getString("profissao", "")
         tv_weight.text = dados.getInt("peso", 0).toString()
-        tv_age.text = dados.getInt("idade", 0).toString()
+        tv_age.text = dados.getString("idade", "")
 
         // *** Colocar foto do Github no ImageView
-        val url = "https://avatars.githubusercontent.com/u/14265058?v=4"
+        val url = "https://avatars.githubusercontent.com/u/62961331?s=400&u=0981e8567818c1952a1015ce17c311cb57b40380&v=4"
         Glide.with(this).load(url).into(iv_profile)
 
     }

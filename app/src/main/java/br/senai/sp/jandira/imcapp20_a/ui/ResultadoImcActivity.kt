@@ -4,9 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import br.senai.sp.jandira.imcapp20_a.R
-import br.senai.sp.jandira.imcapp20_a.calcularImc
-import br.senai.sp.jandira.imcapp20_a.getDicaDoDiaImc
-import br.senai.sp.jandira.imcapp20_a.obterStatus
+import br.senai.sp.jandira.imcapp20_a.utlis.calcularImc
+import br.senai.sp.jandira.imcapp20_a.utlis.getDicaDoDiaImc
+import br.senai.sp.jandira.imcapp20_a.utlis.obterStatus
 
 class ResultadoImcActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
