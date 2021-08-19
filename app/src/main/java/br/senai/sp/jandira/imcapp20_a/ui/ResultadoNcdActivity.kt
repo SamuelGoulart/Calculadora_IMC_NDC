@@ -17,8 +17,7 @@ class ResultadoNcdActivity : AppCompatActivity() {
         val ncd = intent.getDoubleExtra("ncd", 0.0)
 
         textViewNcd.text = ncd.toInt().toString()
-        textViewDica.text =
-            getDicaDoDiaNcd()
+        textViewDica.text = getDicaDoDiaNcd()
 
     }
 }

@@ -103,6 +103,33 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_email" />
 
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bt_gravar">
+
+        <LinearLayout
+            android:layout_width="248dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radioButton2"
+                android:layout_width="119dp"
+                android:layout_height="wrap_content"
+                android:text="Masculino" />
+
+            <RadioButton
+                android:id="@+id/radioButton"
+                android:layout_width="121dp"
+                android:layout_height="wrap_content"
+                android:text="Feminino" />
+        </LinearLayout>
+
+    </RadioGroup>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
