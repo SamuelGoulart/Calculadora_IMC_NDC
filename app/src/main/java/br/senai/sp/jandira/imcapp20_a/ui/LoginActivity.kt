@@ -9,6 +9,7 @@ import android.widget.EditText
 import android.widget.TextView
 import br.senai.sp.jandira.imcapp20_a.R
 import br.senai.sp.jandira.imcapp20_a.dao.UsuarioDao
+import br.senai.sp.jandira.imcapp20_a.utlis.obterDiferencaEntreDatasEmAnos
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
@@ -19,12 +20,17 @@ class LoginActivity : AppCompatActivity() {
     lateinit var tvMensagemErro: TextView
     lateinit var tvCrieSuaConta: TextView
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
         val dados = getSharedPreferences("dados_usuario", Context.MODE_PRIVATE)
         val lembrar = dados.getBoolean("lembrar", false)
+
+//        obterDiferencaEntreDatasEmAnos("20/02/2002")
+//        obterDiferencaEntreDatasEmAnos("5/5/1990")
+
 
         if (lembrar == true){
             abrirDashBoard()

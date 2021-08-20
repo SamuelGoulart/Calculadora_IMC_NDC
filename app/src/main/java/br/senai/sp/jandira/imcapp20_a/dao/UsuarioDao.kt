@@ -5,6 +5,7 @@ import android.content.Context
 import android.database.Cursor
 import android.util.Log
 import br.senai.sp.jandira.imcapp20_a.model.Usuario
+import br.senai.sp.jandira.imcapp20_a.utlis.obterDiferencaEntreDatasEmAnos
 import kotlinx.android.synthetic.main.activity_dash_board.*
 import java.time.LocalDate
 import java.time.Period
@@ -85,6 +86,7 @@ class UsuarioDao(val context: Context, val usuario: Usuario?) {
             val profissaoIndex = cursor.getColumnIndex("profissao")
             val dataNascimentoIndex = cursor.getColumnIndex("data_nascimento")
 
+            val dataNacimento = cursor.getString(dataNascimentoIndex)
            // Criação/ Atualização do SharedPreferences
             // Utilização no restante da aplicação
             val dados =  context.getSharedPreferences("dados_usuario", Context.MODE_PRIVATE)
@@ -92,9 +94,8 @@ class UsuarioDao(val context: Context, val usuario: Usuario?) {
             editor.putString("nome", cursor.getString(nomeIndex))
             editor.putString("email", cursor.getString(emailIndex))
             editor.putString("profissao", cursor.getString(profissaoIndex))
-            editor.putString("idade", cursor.getString(dataNascimentoIndex))
+            editor.putString("idade", obterDiferencaEntreDatasEmAnos(dataNacimento))
             editor.putInt("peso", 0)
-            editor.apply()
 
             Log.i("XPTO", cursor.getString(emailIndex))
             autenticado = true
