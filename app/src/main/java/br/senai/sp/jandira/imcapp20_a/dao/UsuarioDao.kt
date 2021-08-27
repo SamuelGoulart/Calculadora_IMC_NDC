@@ -5,6 +5,7 @@ import android.content.Context
 import android.database.Cursor
 import android.util.Log
 import br.senai.sp.jandira.imcapp20_a.model.Usuario
+import br.senai.sp.jandira.imcapp20_a.utlis.convertBitmapParaByteArray
 import br.senai.sp.jandira.imcapp20_a.utlis.obterDiferencaEntreDatasEmAnos
 import kotlinx.android.synthetic.main.activity_dash_board.*
 import java.time.LocalDate
@@ -28,6 +29,7 @@ class UsuarioDao(val context: Context, val usuario: Usuario?) {
         dados.put("altura", usuario.altura)
         dados.put("data_nascimento", usuario.dataNascimento.toString())
         dados.put("sexo", usuario.sexo.toString())
+        dados.put("foto", convertBitmapParaByteArray(usuario.foto))
 
         // *** Executar o comando de gravação
         db.insert("tb_usuario", null, dados)

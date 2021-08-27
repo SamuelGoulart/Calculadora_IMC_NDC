@@ -2,8 +2,12 @@ package br.senai.sp.jandira.imcapp20_a.ui
 
 import android.app.DatePickerDialog
 import android.content.Context
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -13,7 +17,12 @@ import br.senai.sp.jandira.imcapp20_a.model.Usuario
 import kotlinx.android.synthetic.main.activity_novo_usuario.*
 import java.util.*
 
+
+const val CODE_IMAGEM = 100
+
 class NovoUsuarioActivity : AppCompatActivity() {
+
+     var imageBitmap: Bitmap? = null
 
     //latenit vaz a inicialização ocorrer mais tarde
     private lateinit var editTextNome: EditText
@@ -27,6 +36,12 @@ class NovoUsuarioActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_novo_usuario)
+
+        // DEtectar o click no texto "Trocar foto"
+        tv_trocar_foto.setOnClickListener {
+            abrirGaleria()
+
+        }
 
         editTextNome = findViewById(R.id.et_nome)
         editTextPeso = findViewById(R.id.et_peso)
@@ -62,7 +77,7 @@ class NovoUsuarioActivity : AppCompatActivity() {
 
 
         bt_gravar.setOnClickListener {
-            if (validaForm() == false){
+//            if (validaForm() == false){
 
                 val usuario = Usuario(
                     0,
@@ -73,7 +88,7 @@ class NovoUsuarioActivity : AppCompatActivity() {
                     et_altura.text.toString().toDouble(),
                     et_data_nascimento.text.toString(),
                     'M',
-                    null)
+                     imageBitmap)
 
                 val dao = UsuarioDao(this, usuario)
                 dao.gravar()
@@ -82,8 +97,41 @@ class NovoUsuarioActivity : AppCompatActivity() {
 
                 finish()
             }
-        }
+//        }
 
+    }
+
+    private fun abrirGaleria() {
+
+        // Chamando a galeria de imagens
+        val intent  = Intent(Intent.ACTION_GET_CONTENT)
+
+        // Definir qual o tipo de conteúdo deverá ser obtido
+        intent.type = "image/*"
+
+        // Inicar a Activit, mas neste caso nós queremos que
+        // esta Activity retorne algo para gente, a imgaem
+        startActivityForResult(
+            Intent.createChooser(intent, "Escolha uma foto"), CODE_IMAGEM)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+//
+//        Log.i("PHOTO_GALERY",
+//                   "REQUEST_CODE = $resultCode RESULT_CODE = $requestCode")
+
+        if (requestCode == CODE_IMAGEM && resultCode == -1){
+
+            // Recuperar a imagem no stream
+            val stream = contentResolver.openInputStream(data!!.data!!)
+
+            // Transformar o resultado em um BitMap
+            imageBitmap = BitmapFactory.decodeStream(stream)
+
+            //colocar a imagem no ImageView
+            img_profile.setImageBitmap(imageBitmap)
+        }
     }
 
     private fun validaForm() : Boolean{
