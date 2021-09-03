@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.system.Os.accept
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
@@ -11,7 +12,7 @@ import android.widget.TextView
 import br.senai.sp.jandira.imcapp20_a.R
 import br.senai.sp.jandira.imcapp20_a.dao.UsuarioDao
 import br.senai.sp.jandira.imcapp20_a.utils.obterDiferencaEntreDatasEmAnos
-import kotlinx.android.synthetic.main.activity_login.*
+
 
 class LoginActivity : AppCompatActivity() {
 
