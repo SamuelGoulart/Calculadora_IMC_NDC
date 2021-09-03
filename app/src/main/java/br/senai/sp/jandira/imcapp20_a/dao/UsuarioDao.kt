@@ -2,14 +2,16 @@ package br.senai.sp.jandira.imcapp20_a.dao
 
 import android.content.ContentValues
 import android.content.Context
-import android.database.Cursor
 import android.util.Log
 import br.senai.sp.jandira.imcapp20_a.model.Usuario
-import br.senai.sp.jandira.imcapp20_a.utlis.convertBitmapParaByteArray
-import br.senai.sp.jandira.imcapp20_a.utlis.obterDiferencaEntreDatasEmAnos
-import kotlinx.android.synthetic.main.activity_dash_board.*
+import br.senai.sp.jandira.imcapp20_a.utils.converterBitmapParaBase64
+import br.senai.sp.jandira.imcapp20_a.utils.converterBitmapParaByteArray
+import br.senai.sp.jandira.imcapp20_a.utils.converterByteArrayParaBitmap
+import br.senai.sp.jandira.imcapp20_a.utils.obterDiferencaEntreDatasEmAnos
+import java.time.Duration
 import java.time.LocalDate
 import java.time.Period
+import kotlin.math.log
 
 class UsuarioDao(val context: Context, val usuario: Usuario?) {
 
@@ -29,7 +31,7 @@ class UsuarioDao(val context: Context, val usuario: Usuario?) {
         dados.put("altura", usuario.altura)
         dados.put("data_nascimento", usuario.dataNascimento.toString())
         dados.put("sexo", usuario.sexo.toString())
-        dados.put("foto", convertBitmapParaByteArray(usuario.foto))
+        dados.put("foto", converterBitmapParaByteArray(usuario.foto))
 
         // *** Executar o comando de gravação
         db.insert("tb_usuario", null, dados)
@@ -37,32 +39,32 @@ class UsuarioDao(val context: Context, val usuario: Usuario?) {
         db.close()
     }
 
-    fun autenticar(email: String, senha: String): Boolean {
+    fun autenticar(email: String, senha: String) : Boolean {
         // *** Obter uma instância de leitura do banco
         val db = dbHelper.readableDatabase
 
-
-        // *** Derterminar quais são as colunas da tabela
-        // *** Que nós queremos no resultado
+        // *** Determinar quais são as colunas da tabela
+        // *** que nós queremos no resultado
         // *** Vamos criar uma projeção
-
-        val campos = arrayOf("email",
-                             "senha",
-                             "nome",
-                             "profissao",
-                             "data_nascimento")
+        val campos = arrayOf(
+            "email",
+            "senha",
+            "nome",
+            "profissao",
+            "data_nascimento",
+        "foto")
 
         // *** Vamos definir o filtro da consulta
-        // *** O que estamos fazendo é
+        // *** O que estamos fazendo é construir o filtro
+        // *** "WHERE email = ? AND senha = ?"
         val filtro = "email = ? AND senha = ?"
 
         // *** Vamos criar agora o argumentos do filtro
-        // *** Vamos dizer ao kotlin quais serão os valores
-        // *** que deverão ser substituidos pelas "?" no filtro
-
+        // *** vamos dizer ao Kotlin quais serão os valores
+        // *** que deverão ser substituídos pelas "?" no filtro
         val argumentos = arrayOf(email, senha)
 
-        // *** Executar a consulta e obter  o resultado
+        // *** Executar a consulta e obter o resultado
         // *** em um "cursor"
         val cursor = db.query(
             "tb_usuario",
@@ -76,37 +78,45 @@ class UsuarioDao(val context: Context, val usuario: Usuario?) {
 
         Log.i("XPTO", "Linhas ${cursor.count.toString()}")
 
+        // *** Guardar a quantidade de linhas obtidas na consulta
         val linhas = cursor.count
 
-        var  autenticado = false
+        var autenticado = false;
 
-        if (linhas > 0){
+        if (linhas > 0) {
+            autenticado = true
             cursor.moveToFirst()
 
             val emailIndex = cursor.getColumnIndex("email")
             val nomeIndex = cursor.getColumnIndex("nome")
             val profissaoIndex = cursor.getColumnIndex("profissao")
             val dataNascimentoIndex = cursor.getColumnIndex("data_nascimento")
+            val fotoIndex = cursor.getColumnIndex("foto")
 
-            val dataNacimento = cursor.getString(dataNascimentoIndex)
-           // Criação/ Atualização do SharedPreferences
-            // Utilização no restante da aplicação
-            val dados =  context.getSharedPreferences("dados_usuario", Context.MODE_PRIVATE)
-            val  editor = dados.edit()
+            val dataNascimento = cursor.getString(dataNascimentoIndex)
+
+            // Criação/atualização do sharedPreferences que será
+            // utilizado no restante da aplicação
+            val dados = context.getSharedPreferences("dados_usuario", Context.MODE_PRIVATE)
+            val editor = dados.edit()
             editor.putString("nome", cursor.getString(nomeIndex))
             editor.putString("email", cursor.getString(emailIndex))
             editor.putString("profissao", cursor.getString(profissaoIndex))
-            editor.putString("idade", obterDiferencaEntreDatasEmAnos(dataNacimento))
+            editor.putString("idade", obterDiferencaEntreDatasEmAnos(dataNascimento))
             editor.putInt("peso", 0)
 
-            Log.i("XPTO", cursor.getString(emailIndex))
-            autenticado = true
+            //Converter o byteArray do banco em bitmap
+            var bitmap = converterByteArrayParaBitmap(cursor.getBlob(fotoIndex))
 
+            Log.i("XTPO", converterBitmapParaBase64(bitmap))
+
+            editor.putString("foto", converterBitmapParaBase64(bitmap))
+            editor.apply()
         }
 
         db.close()
         return autenticado
-    }
 
+    }
 
 }

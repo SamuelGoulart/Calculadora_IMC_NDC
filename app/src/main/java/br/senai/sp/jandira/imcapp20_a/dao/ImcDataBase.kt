@@ -27,7 +27,6 @@ class ImcDataBase(context: Context) :
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        TODO("Not yet implemented")
         db!!.execSQL("DELETE FROM tb_usuario")
     }
 

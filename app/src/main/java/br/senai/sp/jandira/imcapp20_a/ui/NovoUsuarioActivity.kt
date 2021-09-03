@@ -8,8 +8,7 @@ import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import br.senai.sp.jandira.imcapp20_a.R
 import br.senai.sp.jandira.imcapp20_a.dao.UsuarioDao
@@ -17,160 +16,117 @@ import br.senai.sp.jandira.imcapp20_a.model.Usuario
 import kotlinx.android.synthetic.main.activity_novo_usuario.*
 import java.util.*
 
-
-const val CODE_IMAGEM = 100
+const val CODE_IMAGE = 100
 
 class NovoUsuarioActivity : AppCompatActivity() {
 
-     var imageBitmap: Bitmap? = null
-
-    //latenit vaz a inicialização ocorrer mais tarde
-    private lateinit var editTextNome: EditText
-    private lateinit var editTextPeso: EditText
-    private lateinit var editTextAltura: EditText
-    private lateinit var editTextEmail: EditText
-    private lateinit var editTextProfissao: EditText
-    private lateinit var editTextSenha: EditText
-    private lateinit var editTextDataNascimento: EditText
+    var imageBitmap: Bitmap? = null
+    lateinit var imgProfile: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_novo_usuario)
 
-        // DEtectar o click no texto "Trocar foto"
+        imgProfile = findViewById(R.id.img_profile)
+
+        // Detectar o click no texto "Trocar foto"
         tv_trocar_foto.setOnClickListener {
             abrirGaleria()
-
         }
 
-        editTextNome = findViewById(R.id.et_nome)
-        editTextPeso = findViewById(R.id.et_peso)
-        editTextAltura = findViewById(R.id.et_altura)
-        editTextEmail = findViewById(R.id.et_email)
-        editTextProfissao = findViewById(R.id.et_profissao)
-        editTextSenha = findViewById(R.id.et_senha)
-        editTextDataNascimento = findViewById(R.id.et_data_nascimento)
-
-        //Criar um calendário
+        // Criar um calendário
         val calendario = Calendar.getInstance()
         val ano = calendario.get(Calendar.YEAR)
-        val mes = calendario.get(Calendar.MONDAY)
+        val mes = calendario.get(Calendar.MONTH)
         val dia = calendario.get(Calendar.DAY_OF_MONTH)
 
         // Abrir um componente DatePickerDialog
-        et_data_nascimento.setOnClickListener{
+        et_data_nascimento.setOnClickListener {
             val dpd = DatePickerDialog(this,
-                DatePickerDialog.OnDateSetListener{ view, _ano, _mes, _dia ->
+                DatePickerDialog.OnDateSetListener{view, _ano, _mes, _dia ->
                     var diaZero = "$_dia"
                     var mesZero = "$_mes"
-                    if (_dia < 10){
+
+                    if (_dia < 10) {
                         diaZero = "0$_dia"
                     }
 
-                    if (_mes < 9){
-                         mesZero = "0${_mes + 1}"
+                    if (_mes < 9) {
+                        mesZero = "0${_mes + 1}"
                     }
                 et_data_nascimento.setText("$diaZero/$mesZero/$_ano")
-            },ano, mes, dia)
+            }, ano, mes, dia)
             dpd.show()
         }
 
-
         bt_gravar.setOnClickListener {
-//            if (validaForm() == false){
+            // *** Criar o sharedPreferences
+//            val dados = getSharedPreferences("dados_usuario", Context.MODE_PRIVATE)
+//
+//            val editor = dados.edit()
+//            editor.putString("nome", et_nome.text.toString())
+//            editor.putString("profissao", et_profissao.text.toString())
+//            editor.putInt("peso", et_peso.text.toString().toInt())
+//            editor.putInt("idade", et_data_nascimento.text.toString().toInt())
+//            editor.putString("email", et_email.text.toString())
+//            editor.putString("senha", et_senha.text.toString())
+//            editor.apply()
 
-                val usuario = Usuario(
-                    0,
-                    et_email.text.toString(),
-                    et_senha.text.toString(),
-                    et_nome.text.toString(),
-                    et_profissao.text.toString(),
-                    et_altura.text.toString().toDouble(),
-                    et_data_nascimento.text.toString(),
-                    'M',
-                     imageBitmap)
+            // Gravar o novo usuário no banco de dados SQLite
+            val usuario = Usuario(
+                0,
+            et_email.text.toString(),
+            et_senha.text.toString(),
+            et_nome.text.toString(),
+            et_profissao.text.toString(),
+            et_altura.text.toString().toDouble(),
+            et_data_nascimento.text.toString(),
+            'M',
+            imageBitmap)
 
-                val dao = UsuarioDao(this, usuario)
-                dao.gravar()
+            val dao = UsuarioDao(this, usuario)
+            dao.gravar()
 
-                Toast.makeText(this, "Dados gravados com sucesso!!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Dados gravados com sucesso!!", Toast.LENGTH_SHORT).show()
 
-                finish()
-            }
-//        }
+            finish()
+
+        }
 
     }
 
     private fun abrirGaleria() {
 
         // Chamando a galeria de imagens
-        val intent  = Intent(Intent.ACTION_GET_CONTENT)
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
 
         // Definir qual o tipo de conteúdo deverá ser obtido
         intent.type = "image/*"
 
-        // Inicar a Activit, mas neste caso nós queremos que
-        // esta Activity retorne algo para gente, a imgaem
+        // Iniciar a Activity, mas neste caso nós queremos que
+        // esta Activity retorne algo pra gente, a imagem
         startActivityForResult(
-            Intent.createChooser(intent, "Escolha uma foto"), CODE_IMAGEM)
+            Intent.createChooser(
+                intent,
+                "Escolha uma foto"),
+            CODE_IMAGE)
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-//
-//        Log.i("PHOTO_GALERY",
-//                   "REQUEST_CODE = $resultCode RESULT_CODE = $requestCode")
 
-        if (requestCode == CODE_IMAGEM && resultCode == -1){
+        if (requestCode == CODE_IMAGE && resultCode == -1) {
 
             // Recuperar a imagem no stream
             val stream = contentResolver.openInputStream(data!!.data!!)
 
-            // Transformar o resultado em um BitMap
+            // Transformar o stream em um BitMap
             imageBitmap = BitmapFactory.decodeStream(stream)
 
-            //colocar a imagem no ImageView
-            img_profile.setImageBitmap(imageBitmap)
+            // Colocar a imagem no ImageView
+            imgProfile.setImageBitmap(imageBitmap)
         }
+
     }
-
-    private fun validaForm() : Boolean{
-
-        var error = false
-
-        if (editTextNome.text.isEmpty()){
-            editTextNome.error = "Digite seu nome"
-            error = true
-        }
-
-        if (editTextPeso.text.isEmpty()){
-            editTextPeso.error = "Digite seu peso!"
-            error = true
-        }
-
-        if (editTextAltura.text.isEmpty()){
-            editTextAltura.error = "Digite sua altura"
-            error = true
-        }
-
-        if (editTextEmail.text.isEmpty()){
-            editTextEmail.error = "Digite seu email"
-            error = true
-        }
-
-        if (editTextProfissao.text.isEmpty()){
-            editTextProfissao.error = "Digite o seu email"
-        }
-
-        if (editTextSenha.text.isEmpty()){
-            editTextSenha.error = "Digite sua senha"
-        }
-
-        if (editTextDataNascimento.text.isEmpty()){
-            editTextDataNascimento.error = "Digite sua idade"
-        }
-
-        return error
-    }
-
 }

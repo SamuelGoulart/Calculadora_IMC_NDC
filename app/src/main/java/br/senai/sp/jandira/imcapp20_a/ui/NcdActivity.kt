@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
 import br.senai.sp.jandira.imcapp20_a.R
-import br.senai.sp.jandira.imcapp20_a.utlis.calcularNcd
+import br.senai.sp.jandira.imcapp20_a.utils.calcularNcd
 
 class NcdActivity : AppCompatActivity() {
 
