@@ -2,6 +2,11 @@
     <string name="app_name">IMC APP 2.0</string>
 
     <!--    Strings Main Activity-->
+
+    <string name="titulo_dialog">Quer completar seu cadastro agora? Precisamos do seu peso.</string>
+    <string name="signin">Sim</string>
+    <string name="cancel">Não</string>
+
     <string name="main_title">Calculadora Saudável</string>
     <string name="text_fazer_hoje">O que você deseja fazer hoje?</string>
 

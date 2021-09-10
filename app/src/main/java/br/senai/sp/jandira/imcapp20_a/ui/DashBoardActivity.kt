@@ -1,20 +1,26 @@
 package br.senai.sp.jandira.imcapp20_a.ui
 
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import br.senai.sp.jandira.imcapp20_a.R
 import br.senai.sp.jandira.imcapp20_a.utils.converterBase64ParaBitmap
-import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_dash_board.*
+import kotlinx.android.synthetic.main.layout_alert_dialog.*
 
 class DashBoardActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dash_board)
 
         preencherDashBoard()
+        genero_preenchido()
 
         tv_logout.setOnClickListener {
             val dados = getSharedPreferences("dados_usuario", Context.MODE_PRIVATE)
@@ -47,4 +53,57 @@ class DashBoardActivity : AppCompatActivity() {
 //        Glide.with(this).load(url).into(iv_profile)
 
     }
+
+    private fun genero_preenchido() {
+        val dados = getSharedPreferences("dados_usuario", Context.MODE_PRIVATE)
+
+        val genero = dados.getString("genero", "")
+
+        if (genero == "") {
+            abrir_dialog()
+        }
+    }
+
+
+    private fun abrir_dialog() {
+        val alertDialog = AlertDialog.Builder(this)
+        alertDialog.setMessage(R.string.titulo_dialog)
+
+            .setPositiveButton(R.string.signin,
+                DialogInterface.OnClickListener { dialog, id ->
+                    abrir_dialog_peso()
+                })
+
+            .setNegativeButton(R.string.cancel,
+                DialogInterface.OnClickListener { dialog, id ->
+                    dialog.cancel()
+                })
+
+        val dialog = alertDialog.create()
+        dialog.show()
+
+    }
+
+    private fun abrir_dialog_peso() {
+        val alertDialog = AlertDialog.Builder(this)
+        val inflater = layoutInflater
+        val view = inflater.inflate(R.layout.layout_alert_dialog, null)
+
+        alertDialog.setView(view)
+
+            .setPositiveButton(R.string.signin,
+                DialogInterface.OnClickListener { dialog, id ->
+                })
+
+            .setNegativeButton(R.string.cancel,
+                DialogInterface.OnClickListener { dialog, id ->
+                    dialog.cancel()
+                })
+
+        val dialog = alertDialog.create()
+        dialog.show()
+
+    }
+
+
 }
