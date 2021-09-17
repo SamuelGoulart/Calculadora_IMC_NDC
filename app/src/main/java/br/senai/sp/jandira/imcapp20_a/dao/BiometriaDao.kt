@@ -8,14 +8,20 @@ class BiometriaDao(val context: Context, val biometria: Biometria?) {
 
     val dbHelper = ImcDataBase.getDatabase(context)
 
-    public fun gravarBiometria() {
-
+    fun gravarBiometria() {
 
         val db = dbHelper.writableDatabase
 
         val dados = ContentValues()
         dados.put("peso", biometria!!.peso)
-        dados.put("nivelAtiviade", biometria.nivelAtiviade)
+        dados.put("nivel_atividade", biometria.nivelAtiviade)
+        dados.put("data_pesagem", biometria.dataPesagem.toString())
+        dados.put("id_usario", biometria.usuario.id.toString())
+
+        // *** Executar o comando de gravação
+        db.insert("tb_biometria", null, dados)
+
+        db.close()
     }
 
 }

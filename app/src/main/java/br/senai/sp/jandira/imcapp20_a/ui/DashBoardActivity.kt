@@ -13,8 +13,10 @@ import androidx.appcompat.app.AlertDialog
 import br.senai.sp.jandira.imcapp20_a.R
 import br.senai.sp.jandira.imcapp20_a.dao.BiometriaDao
 import br.senai.sp.jandira.imcapp20_a.model.Biometria
+import br.senai.sp.jandira.imcapp20_a.model.Usuario
 import br.senai.sp.jandira.imcapp20_a.utils.converterBase64ParaBitmap
 import kotlinx.android.synthetic.main.activity_dash_board.*
+import java.time.LocalDate
 
 class DashBoardActivity : AppCompatActivity() {
 
@@ -94,7 +96,7 @@ class DashBoardActivity : AppCompatActivity() {
         val inflater = layoutInflater
         val view = inflater.inflate(R.layout.layout_alert_dialog, null)
         val editText = view.findViewById<EditText>(R.id.editTextpeso)
-        spinner_atividades = findViewById(R.id.spinner_atividades)
+//        spinner_atividades = findViewById(R.id.spinner_atividades)
 
         val buttonGravar = view.findViewById<Button>(R.id.btn_submit_peso)
 
@@ -104,24 +106,47 @@ class DashBoardActivity : AppCompatActivity() {
         dialog.show()
 
 
-        var nivelAtividade: Int = 0
-        nivelAtividade = spinner_atividades.selectedItemPosition
+        val dados = getSharedPreferences("dados_usuario", Context.MODE_PRIVATE)
+
+        val email = dados.getString("email", "")
+        val senha = dados.getString("senha", "")
+        val nome = dados.getString("nome", "")
+        val profissao = dados.getString("profissao", "")
+//      val altura = dados.getFloat("altura", "0.0")
+        val dataNascimento = dados.getString("idade", "")
+        val sexo = dados.getString("sexo", "F")
+
+        val usuario = Usuario(
+            0,
+            email.toString(),
+            senha.toString(),
+            nome.toString(),
+            profissao.toString(),
+            1.74,
+            dataNascimento.toString(),
+            'M'
+        )
+
+
+
+//        var nivelAtividade: Int = 0
+//        nivelAtividade = spinner_atividades.selectedItemPosition
 
 
         buttonGravar.setOnClickListener {
             val biometria = Biometria(
                 0,
                 editText.text.toString().toDouble(),
-                nivelAtividade.toString().toInt())
+                1,
+                LocalDate.now(),
+                usuario)
 
             val dao = BiometriaDao( this, biometria)
             dao.gravarBiometria()
 
             Toast.makeText(this, "Dados gravados com sucesso!!", Toast.LENGTH_SHORT).show()
 
-            finish()
-
-
+            dialog.cancel()
         }
 
     }
