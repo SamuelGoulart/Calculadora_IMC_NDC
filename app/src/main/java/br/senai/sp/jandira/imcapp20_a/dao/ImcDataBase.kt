@@ -6,7 +6,7 @@ import android.util.Log
 import org.jetbrains.anko.db.ManagedSQLiteOpenHelper
 
 const val DATABASE_NAME = "imc.db"
-const val DATABASE_VERSION = 2
+const val DATABASE_VERSION = 1
 
 class ImcDataBase(context: Context) :
     ManagedSQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {

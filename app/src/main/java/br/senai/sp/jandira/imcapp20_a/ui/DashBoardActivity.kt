@@ -20,8 +20,6 @@ import java.time.LocalDate
 
 class DashBoardActivity : AppCompatActivity() {
 
-    lateinit var spinner_atividades: Spinner
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dash_board)
@@ -96,7 +94,7 @@ class DashBoardActivity : AppCompatActivity() {
         val inflater = layoutInflater
         val view = inflater.inflate(R.layout.layout_alert_dialog, null)
         val editText = view.findViewById<EditText>(R.id.editTextpeso)
-//        spinner_atividades = findViewById(R.id.spinner_atividades)
+        val spinAtividadde: Spinner = findViewById(R.id.spinner_nivel_atividades)
 
         val buttonGravar = view.findViewById<Button>(R.id.btn_submit_peso)
 
@@ -129,15 +127,15 @@ class DashBoardActivity : AppCompatActivity() {
 
 
 
-//        var nivelAtividade: Int = 0
-//        nivelAtividade = spinner_atividades.selectedItemPosition
+        var nivelAtividade: Int = 0
+        nivelAtividade = spinAtividadde.selectedItemPosition
 
 
         buttonGravar.setOnClickListener {
             val biometria = Biometria(
                 0,
                 editText.text.toString().toDouble(),
-                1,
+                nivelAtividade,
                 LocalDate.now(),
                 usuario)
 
