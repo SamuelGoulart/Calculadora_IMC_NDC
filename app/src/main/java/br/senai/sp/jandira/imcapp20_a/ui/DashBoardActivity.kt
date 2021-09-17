@@ -6,14 +6,19 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import br.senai.sp.jandira.imcapp20_a.R
+import br.senai.sp.jandira.imcapp20_a.dao.BiometriaDao
+import br.senai.sp.jandira.imcapp20_a.model.Biometria
 import br.senai.sp.jandira.imcapp20_a.utils.converterBase64ParaBitmap
 import kotlinx.android.synthetic.main.activity_dash_board.*
-import kotlinx.android.synthetic.main.layout_alert_dialog.*
 
 class DashBoardActivity : AppCompatActivity() {
+
+    lateinit var spinner_atividades: Spinner
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,20 +93,36 @@ class DashBoardActivity : AppCompatActivity() {
         val alertDialog = AlertDialog.Builder(this)
         val inflater = layoutInflater
         val view = inflater.inflate(R.layout.layout_alert_dialog, null)
+        val editText = view.findViewById<EditText>(R.id.editTextpeso)
+        spinner_atividades = findViewById(R.id.spinner_atividades)
+
+        val buttonGravar = view.findViewById<Button>(R.id.btn_submit_peso)
 
         alertDialog.setView(view)
 
-            .setPositiveButton(R.string.signin,
-                DialogInterface.OnClickListener { dialog, id ->
-                })
-
-            .setNegativeButton(R.string.cancel,
-                DialogInterface.OnClickListener { dialog, id ->
-                    dialog.cancel()
-                })
-
         val dialog = alertDialog.create()
         dialog.show()
+
+
+        var nivelAtividade: Int = 0
+        nivelAtividade = spinner_atividades.selectedItemPosition
+
+
+        buttonGravar.setOnClickListener {
+            val biometria = Biometria(
+                0,
+                editText.text.toString().toDouble(),
+                nivelAtividade.toString().toInt())
+
+            val dao = BiometriaDao( this, biometria)
+            dao.gravarBiometria()
+
+            Toast.makeText(this, "Dados gravados com sucesso!!", Toast.LENGTH_SHORT).show()
+
+            finish()
+
+
+        }
 
     }
 

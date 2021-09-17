@@ -3,6 +3,7 @@ package br.senai.sp.jandira.imcapp20_a.dao
 import android.content.ContentValues
 import android.content.Context
 import android.util.Log
+import br.senai.sp.jandira.imcapp20_a.model.Biometria
 import br.senai.sp.jandira.imcapp20_a.model.Usuario
 import br.senai.sp.jandira.imcapp20_a.utils.converterBitmapParaBase64
 import br.senai.sp.jandira.imcapp20_a.utils.converterBitmapParaByteArray
