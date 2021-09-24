@@ -49,7 +49,6 @@
         android:layout_marginTop="24dp"
         android:text="Enviar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_atividades" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner_nivel_atividades" />
 </androidx.constraintlayout.widget.ConstraintLayout>

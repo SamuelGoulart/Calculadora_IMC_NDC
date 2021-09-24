@@ -77,7 +77,7 @@ class UsuarioDao(val context: Context, val usuario: Usuario?) {
             null
         )
 
-        Log.i("XPTO", "Linhas ${cursor.count.toString()}")
+       // Log.i("XPTO", "Linhas ${cursor.count.toString()}")
 
         // *** Guardar a quantidade de linhas obtidas na consulta
         val linhas = cursor.count

@@ -9,6 +9,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import br.senai.sp.jandira.imcapp20_a.R
 import br.senai.sp.jandira.imcapp20_a.dao.UsuarioDao
 import br.senai.sp.jandira.imcapp20_a.utils.obterDiferencaEntreDatasEmAnos
@@ -19,13 +20,14 @@ class LoginActivity : AppCompatActivity() {
     lateinit var editUser: EditText
     lateinit var editPassword: EditText
     lateinit var btnLogin: Button
-    lateinit var tvMensagemErro: TextView
     lateinit var tvCrieSuaConta: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        // Remover a AppBar
+          supportActionBar!!.hide()
 
         // **** TESTAR O MÉTODO obterDiferencaEntreDatasEmAnos
         obterDiferencaEntreDatasEmAnos("10/10/1996")
@@ -42,7 +44,6 @@ class LoginActivity : AppCompatActivity() {
         editUser = findViewById(R.id.ed_user)
         editPassword = findViewById(R.id.ed_password)
         btnLogin = findViewById(R.id.btn_login)
-        tvMensagemErro = findViewById(R.id.tv_mensagem_erro)
         tvCrieSuaConta = findViewById(R.id.tv_crie_sua_conta)
 
         tvCrieSuaConta.setOnClickListener {
@@ -85,24 +86,9 @@ class LoginActivity : AppCompatActivity() {
 
         if (autenticado) {
             abrirDashBoard()
+        } else {
+            Toast.makeText(this, "Usuário ou senha incorretos!", Toast.LENGTH_SHORT).show()
         }
 
-//        val dados = getSharedPreferences("dados_usuario", Context.MODE_PRIVATE)
-//
-//        val userPreferences = dados.getString("email", "Não encontrado")
-//        val passPreferences = dados.getString("senha", "Não encontrado")
-
-//        if (user == userPreferences && pass == passPreferences){
-//
-//            // Gravar o lembrar no sharedPreferences
-//            val editor = dados.edit()
-//            editor.putBoolean("lembrar", check_lembrar.isChecked)
-//            editor.apply()
-//
-//            abrirDashBoard()
-//
-//        } else {
-//            tvMensagemErro.text = "Usuário ou senha incorretos!"
-//        }
     }
 }

@@ -8,6 +8,8 @@ import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.Toast
 import br.senai.sp.jandira.imcapp20_a.R
@@ -26,6 +28,14 @@ class NovoUsuarioActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_novo_usuario)
+
+        supportActionBar!!.title = "Novo usuário"
+        supportActionBar!!.subtitle = "Cadastre seu usuário"
+        supportActionBar!!.
+              setBackgroundDrawable(
+                  getDrawable(R.drawable.toolbar_background))
+
+        supportActionBar!!.elevation = 0.0f
 
         imgProfile = findViewById(R.id.img_profile)
 
@@ -59,22 +69,12 @@ class NovoUsuarioActivity : AppCompatActivity() {
             dpd.show()
         }
 
-        bt_gravar.setOnClickListener {
-            // *** Criar o sharedPreferences
-//            val dados = getSharedPreferences("dados_usuario", Context.MODE_PRIVATE)
-//
-//            val editor = dados.edit()
-//            editor.putString("nome", et_nome.text.toString())
-//            editor.putString("profissao", et_profissao.text.toString())
-//            editor.putInt("peso", et_peso.text.toString().toInt())
-//            editor.putInt("idade", et_data_nascimento.text.toString().toInt())
-//            editor.putString("email", et_email.text.toString())
-//            editor.putString("senha", et_senha.text.toString())
-//            editor.apply()
+    }
 
-            // Gravar o novo usuário no banco de dados SQLite
-            val usuario = Usuario(
-                0,
+    private fun salvar() {
+
+        val usuario = Usuario(
+            0,
             et_email.text.toString(),
             et_senha.text.toString(),
             et_nome.text.toString(),
@@ -82,17 +82,45 @@ class NovoUsuarioActivity : AppCompatActivity() {
             et_altura.text.toString().toDouble(),
             et_data_nascimento.text.toString(),
             'M',
+           // if(radio_feminino.isCheced) 'F' else 'M',
             imageBitmap)
 
-            val dao = UsuarioDao(this, usuario)
-            dao.gravar()
+        val dao = UsuarioDao(this, usuario)
+        dao.gravar()
 
-            Toast.makeText(this, "Dados gravados com sucesso!!", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Dados gravados com sucesso!!", Toast.LENGTH_SHORT).show()
 
-            finish()
+        finish()
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+
+        val inflater = menuInflater
+        inflater.inflate(R.menu.menu_novo_usuario, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when(item.itemId){
+            R.id.menu_save ->{
+                 salvar()
+                return true
+            }
+            R.id.menu_cancel ->{
+                Toast.makeText(this, "Cancel", Toast.LENGTH_LONG)
+                return true
+
+            }
+            R.id.menu_help ->{
+                Toast.makeText(this, "Help", Toast.LENGTH_LONG)
+                return true
+
+            }
         }
 
+        return super.onOptionsItemSelected(item)
     }
 
     private fun abrirGaleria() {

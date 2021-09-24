@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import br.senai.sp.jandira.imcapp20_a.R
 import br.senai.sp.jandira.imcapp20_a.dao.BiometriaDao
+import br.senai.sp.jandira.imcapp20_a.dao.UsuarioDao
 import br.senai.sp.jandira.imcapp20_a.model.Biometria
 import br.senai.sp.jandira.imcapp20_a.model.Usuario
 import br.senai.sp.jandira.imcapp20_a.utils.converterBase64ParaBitmap
@@ -24,8 +25,10 @@ class DashBoardActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dash_board)
 
-        preencherDashBoard()
         genero_preenchido()
+
+        // Remover a AppBar
+        supportActionBar!!.hide()
 
         tv_logout.setOnClickListener {
             val dados = getSharedPreferences("dados_usuario", Context.MODE_PRIVATE)
@@ -60,13 +63,21 @@ class DashBoardActivity : AppCompatActivity() {
     }
 
     private fun genero_preenchido() {
-        val dados = getSharedPreferences("dados_usuario", Context.MODE_PRIVATE)
 
-        val genero = dados.getString("genero", "")
+        val dao = BiometriaDao(this, null)
+        val confirmado = dao.gravarDadosNoSharedPreferences()
 
-        if (genero == "") {
-            abrir_dialog()
+        if (confirmado){
+            val dados = getSharedPreferences("dados_biometria", Context.MODE_PRIVATE)
+
+            val peso = dados.getInt("peso", 0)
+
+            if (peso == 0) {
+                abrir_dialog()
+            }
         }
+
+        preencherDashBoard()
     }
 
 
@@ -94,7 +105,7 @@ class DashBoardActivity : AppCompatActivity() {
         val inflater = layoutInflater
         val view = inflater.inflate(R.layout.layout_alert_dialog, null)
         val editText = view.findViewById<EditText>(R.id.editTextpeso)
-        val spinAtividadde: Spinner = findViewById(R.id.spinner_nivel_atividades)
+        //val spinAtividadde: Spinner = findViewById(R.id.spinner_nivel_atividades)
 
         val buttonGravar = view.findViewById<Button>(R.id.btn_submit_peso)
 
@@ -127,15 +138,15 @@ class DashBoardActivity : AppCompatActivity() {
 
 
 
-        var nivelAtividade: Int = 0
-        nivelAtividade = spinAtividadde.selectedItemPosition
+       // var nivelAtividade: Int = 0
+        //nivelAtividade = spinAtividadde!!.selectedItemPosition
 
 
         buttonGravar.setOnClickListener {
             val biometria = Biometria(
                 0,
                 editText.text.toString().toDouble(),
-                nivelAtividade,
+                0,
                 LocalDate.now(),
                 usuario)
 
