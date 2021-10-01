@@ -87,25 +87,11 @@
             app:layout_constraintTop_toBottomOf="@+id/et_nome" />
 
         <EditText
-            android:id="@+id/et_peso"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="20dp"
-            android:ems="10"
-            android:hint="Peso"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_altura" />
-
-        <EditText
             android:id="@+id/et_data_nascimento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="20dp"
             android:ems="10"
             android:focusable="false"
@@ -113,7 +99,7 @@
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_peso" />
+            app:layout_constraintTop_toBottomOf="@+id/et_altura" />
 
         <EditText
             android:id="@+id/et_altura"
@@ -129,16 +115,6 @@
             app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/et_profissao" />
-
-        <Button
-            android:id="@+id/bt_gravar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/header_background"
-            android:text="Gravar"
-            android:textColor="@android:color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <!--        <com.google.android.material.textfield.TextInputLayout-->
         <!--            android:id="@+id/textField"-->

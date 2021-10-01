@@ -12,7 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import br.senai.sp.jandira.imcapp20_a.R
 import br.senai.sp.jandira.imcapp20_a.dao.UsuarioDao
-import br.senai.sp.jandira.imcapp20_a.utils.obterDiferencaEntreDatasEmAnos
+import br.senai.sp.jandira.imcapp20_a.utils.obterDiferencaEntredateEmAnos
 
 
 class LoginActivity : AppCompatActivity() {
@@ -30,8 +30,8 @@ class LoginActivity : AppCompatActivity() {
           supportActionBar!!.hide()
 
         // **** TESTAR O MÉTODO obterDiferencaEntreDatasEmAnos
-        obterDiferencaEntreDatasEmAnos("10/10/1996")
-        obterDiferencaEntreDatasEmAnos("03/08/1990")
+        obterDiferencaEntredateEmAnos("10/10/1996")
+        obterDiferencaEntredateEmAnos("03/08/1990")
 
 
         val dados = getSharedPreferences("dados_usuario", Context.MODE_PRIVATE)

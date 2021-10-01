@@ -5,10 +5,7 @@ import android.content.Context
 import android.util.Log
 import br.senai.sp.jandira.imcapp20_a.model.Biometria
 import br.senai.sp.jandira.imcapp20_a.model.Usuario
-import br.senai.sp.jandira.imcapp20_a.utils.converterBitmapParaBase64
-import br.senai.sp.jandira.imcapp20_a.utils.converterBitmapParaByteArray
-import br.senai.sp.jandira.imcapp20_a.utils.converterByteArrayParaBitmap
-import br.senai.sp.jandira.imcapp20_a.utils.obterDiferencaEntreDatasEmAnos
+import br.senai.sp.jandira.imcapp20_a.utils.*
 import java.time.Duration
 import java.time.LocalDate
 import java.time.Period
@@ -48,6 +45,7 @@ class UsuarioDao(val context: Context, val usuario: Usuario?) {
         // *** que nós queremos no resultado
         // *** Vamos criar uma projeção
         val campos = arrayOf(
+            "id",
             "email",
             "senha",
             "nome",
@@ -88,6 +86,7 @@ class UsuarioDao(val context: Context, val usuario: Usuario?) {
             autenticado = true
             cursor.moveToFirst()
 
+            val idIndex = cursor.getColumnIndex("id")
             val emailIndex = cursor.getColumnIndex("email")
             val nomeIndex = cursor.getColumnIndex("nome")
             val profissaoIndex = cursor.getColumnIndex("profissao")
@@ -100,10 +99,12 @@ class UsuarioDao(val context: Context, val usuario: Usuario?) {
             // utilizado no restante da aplicação
             val dados = context.getSharedPreferences("dados_usuario", Context.MODE_PRIVATE)
             val editor = dados.edit()
+
+            editor.putInt("id", cursor.getString(idIndex).toInt())
             editor.putString("nome", cursor.getString(nomeIndex))
             editor.putString("email", cursor.getString(emailIndex))
             editor.putString("profissao", cursor.getString(profissaoIndex))
-            editor.putString("idade", obterDiferencaEntreDatasEmAnos(dataNascimento))
+            editor.putString("idade", obterDiferencaEntredateEmAnos(dataNascimento))
             editor.putInt("peso", 0)
 
             //Converter o byteArray do banco em bitmap

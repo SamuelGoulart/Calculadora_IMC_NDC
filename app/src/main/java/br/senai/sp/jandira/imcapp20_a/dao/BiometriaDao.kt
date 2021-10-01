@@ -2,6 +2,7 @@ package br.senai.sp.jandira.imcapp20_a.dao
 
 import android.content.ContentValues
 import android.content.Context
+import android.util.Log
 import br.senai.sp.jandira.imcapp20_a.model.Biometria
 
 class BiometriaDao(val context: Context, val biometria: Biometria?) {
@@ -26,6 +27,8 @@ class BiometriaDao(val context: Context, val biometria: Biometria?) {
 
 
     fun gravarDadosNoSharedPreferences() : Boolean {
+        val dados = context.getSharedPreferences("dados_usuario", Context.MODE_PRIVATE)
+
         // *** Obter uma instância de leitura do banco
         val db = dbHelper.readableDatabase
 
@@ -37,18 +40,28 @@ class BiometriaDao(val context: Context, val biometria: Biometria?) {
             "peso",
             "nivel_atividade",
             "data_pesagem",
-            "id_usuario"
+            "id_usario"
         )
+
+        val idUsuario = dados.getInt("id", 0)
+
+        val filtro = "id_usario = ${idUsuario}"
+
+        Log.i("XPTO10", "id = ${idUsuario.toString()}")
+
+        val ordem = "id DESC"
 
         val cursor = db.query(
             "tb_biometria",
             campos,
+            filtro,
             null,
             null,
             null,
-            null,
-            null
+            ordem
         )
+
+
 
         val linhas = cursor.count
 
@@ -62,7 +75,7 @@ class BiometriaDao(val context: Context, val biometria: Biometria?) {
             val pesoIndex = cursor.getColumnIndex("peso")
             val nivelAtividadeIndex = cursor.getColumnIndex("nivel_atividade")
             val dataPesagemIndex = cursor.getColumnIndex("data_pesagem")
-            val idUsuarioIndex = cursor.getColumnIndex("id_usuario")
+            val idUsuarioIndex = cursor.getColumnIndex("id_usario")
 
             val dados = context.getSharedPreferences("dados_biometria", Context.MODE_PRIVATE)
             val editor = dados.edit()
@@ -71,7 +84,7 @@ class BiometriaDao(val context: Context, val biometria: Biometria?) {
             editor.putFloat("peso", cursor.getFloat(pesoIndex))
             editor.putInt("nivel_atividade", cursor.getInt(nivelAtividadeIndex))
             editor.putString("data_pesagem", cursor.getString(dataPesagemIndex))
-            editor.putInt("id_usuario", cursor.getInt(idUsuarioIndex))
+            editor.putInt("id_usario", cursor.getInt(idUsuarioIndex))
 
             editor.apply()
         }

@@ -45,10 +45,12 @@ class DashBoardActivity : AppCompatActivity() {
 
     private fun preencherDashBoard() {
         val dados = getSharedPreferences("dados_usuario", Context.MODE_PRIVATE)
+        val dadosBiometria = getSharedPreferences("dados_biometria", Context.MODE_PRIVATE)
+
 
         tv_profile_name.text = dados.getString("nome", "")
         tv_profile_occupation.text = dados.getString("profissao", "")
-        tv_weight.text = dados.getInt("peso", 0).toString()
+        tv_weight.text = dadosBiometria.getInt("peso", 0).toString()
         tv_age.text = dados.getString("idade", "")
 
         val imagemBase64 = dados.getString("foto", "")
@@ -65,9 +67,7 @@ class DashBoardActivity : AppCompatActivity() {
     private fun genero_preenchido() {
 
         val dao = BiometriaDao(this, null)
-        val confirmado = dao.gravarDadosNoSharedPreferences()
 
-        if (confirmado){
             val dados = getSharedPreferences("dados_biometria", Context.MODE_PRIVATE)
 
             val peso = dados.getInt("peso", 0)
@@ -75,7 +75,6 @@ class DashBoardActivity : AppCompatActivity() {
             if (peso == 0) {
                 abrir_dialog()
             }
-        }
 
         preencherDashBoard()
     }
@@ -117,6 +116,7 @@ class DashBoardActivity : AppCompatActivity() {
 
         val dados = getSharedPreferences("dados_usuario", Context.MODE_PRIVATE)
 
+        val id = dados.getInt("id", 0)
         val email = dados.getString("email", "")
         val senha = dados.getString("senha", "")
         val nome = dados.getString("nome", "")
@@ -126,7 +126,7 @@ class DashBoardActivity : AppCompatActivity() {
         val sexo = dados.getString("sexo", "F")
 
         val usuario = Usuario(
-            0,
+            id,
             email.toString(),
             senha.toString(),
             nome.toString(),
@@ -152,6 +152,13 @@ class DashBoardActivity : AppCompatActivity() {
 
             val dao = BiometriaDao( this, biometria)
             dao.gravarBiometria()
+
+            val confirmado = dao.gravarDadosNoSharedPreferences();
+
+            if (confirmado) {
+                val intent = Intent(this, DashBoardActivity::class.java)
+                startActivity(intent)
+            }
 
             Toast.makeText(this, "Dados gravados com sucesso!!", Toast.LENGTH_SHORT).show()
 
